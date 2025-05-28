@@ -1,6 +1,5 @@
 package com.ecomarket.ApiNotificaciones.Model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -32,9 +31,9 @@ public class Notificacion {
     private String titulo;
     private String mensaje;
 
-    private LocalDateTime enviadaEn;
+    private LocalDateTime enviada_en;
 
-    private LocalDateTime leidaEn;
+    private LocalDateTime leida_en;
 
     private String estado;
 

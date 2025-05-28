@@ -1,10 +1,14 @@
 package com.ecomarket.ApiNotificaciones.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ecomarket.ApiNotificaciones.Model.Notificacion;
 import com.ecomarket.ApiNotificaciones.Repository.NotificacionRepository;
@@ -51,5 +55,12 @@ public class NotificacionService {
         }
         return null;
     }
+
+    @PostMapping
+    public ResponseEntity<Void> crearNotificacion(@RequestBody Notificacion notificacion) {
+        notificacion.setEnviadaEn(LocalDateTime.now());
+        notificacionRepository.save(notificacion);
+    return ResponseEntity.ok().build();
+}
 
 }
