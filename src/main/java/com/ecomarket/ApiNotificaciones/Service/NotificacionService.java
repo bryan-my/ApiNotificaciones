@@ -58,7 +58,7 @@ public class NotificacionService {
 
     @PostMapping
     public ResponseEntity<Void> crearNotificacion(@RequestBody Notificacion notificacion) {
-        notificacion.setEnviadaEn(LocalDateTime.now());
+        notificacion.setEnviada_en(LocalDateTime.now());
         notificacionRepository.save(notificacion);
     return ResponseEntity.ok().build();
 }
