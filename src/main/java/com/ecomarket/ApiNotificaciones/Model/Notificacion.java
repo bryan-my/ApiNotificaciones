@@ -37,6 +37,9 @@ public class Notificacion {
 
     private String estado;
 
+    @Column(name = "boleta_id", nullable = false)
+    private Integer boletaId;
+
 
 
 }

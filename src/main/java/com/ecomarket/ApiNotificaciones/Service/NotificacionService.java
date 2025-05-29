@@ -33,6 +33,10 @@ public class NotificacionService {
         List<Boleta> boletas = boletaRepository.findByFechaEmisionBetween(inicio, fin);
 
         for (Boleta boleta : boletas) {
+
+             if (notificacionRepository.findByBoletaId(boleta.getBoletaId()).isPresent()) {
+        continue; // Ya existe, la saltamos
+    }
             Notificacion notificacion = new Notificacion();
             notificacion.setUsuarioId(boleta.getUsuario().getId());
             notificacion.setTipo("Compra");
