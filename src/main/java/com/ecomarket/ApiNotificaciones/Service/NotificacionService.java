@@ -1,5 +1,6 @@
 package com.ecomarket.ApiNotificaciones.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.ecomarket.ApiNotificaciones.Model.Boleta;
 import com.ecomarket.ApiNotificaciones.Model.Notificacion;
+import com.ecomarket.ApiNotificaciones.Repository.BoletaRepository;
 import com.ecomarket.ApiNotificaciones.Repository.NotificacionRepository;
 
 @Service
@@ -18,6 +21,29 @@ public class NotificacionService {
 
     @Autowired
     private NotificacionRepository notificacionRepository;
+
+    private BoletaRepository boletaRepository;
+
+
+
+    public void generarNotificacionesDelDia() {
+        LocalDateTime inicio = LocalDate.now().atStartOfDay();
+        LocalDateTime fin = inicio.plusDays(1);
+
+        List<Boleta> boletas = boletaRepository.findByFechaEmisionBetween(inicio, fin);
+
+        for (Boleta boleta : boletas) {
+            Notificacion notificacion = new Notificacion();
+            notificacion.setUsuarioId(boleta.getUsuario().getId());
+            notificacion.setTipo("Compra");
+            notificacion.setTitulo("¡Compra realizada!");
+            notificacion.setMensaje("Hola " + boleta.getUsuario().getNombre() + ", tu compra fue registrada por $" + boleta.getTotal());
+            notificacion.setEnviada_en(LocalDateTime.now());
+            notificacion.setEstado("enviada");
+
+            notificacionRepository.save(notificacion);
+        }
+    }
 
     // Obtener todos los productos
     public List<Notificacion> getAll() {

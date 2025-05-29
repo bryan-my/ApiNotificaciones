@@ -16,6 +16,15 @@ public class NotificacionController {
     private NotificacionService notificacionService;
 
 
+
+
+    @GetMapping("/generar")
+    public ResponseEntity<String> generarNotificaciones() {
+        notificacionService.generarNotificacionesDelDia();
+        return ResponseEntity.ok("Notificaciones generadas.");
+}
+
+
     @GetMapping
     public ResponseEntity<List<Notificacion>> getAll(){
         return ResponseEntity.ok(notificacionService.getAll());
