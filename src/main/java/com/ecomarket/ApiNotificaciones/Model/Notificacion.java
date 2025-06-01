@@ -31,15 +31,14 @@ public class Notificacion {
     private String titulo;
     private String mensaje;
 
-    private LocalDateTime enviada_en;
+    @Column(name = "enviada_en")
+    private LocalDateTime enviadaEn;
 
-    private LocalDateTime leida_en;
+    @Column(name = "leida_en")
+    private LocalDateTime leidaEn;
 
     private String estado;
 
-    @Column(name = "boleta_id", nullable = false)
+    @Column(name = "boleta_id")
     private Integer boletaId;
-
-
-
 }

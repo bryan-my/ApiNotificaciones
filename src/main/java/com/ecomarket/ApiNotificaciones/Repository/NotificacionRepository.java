@@ -1,15 +1,13 @@
 package com.ecomarket.ApiNotificaciones.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.ecomarket.ApiNotificaciones.Model.Notificacion;
-
-public interface NotificacionRepository extends JpaRepository<Notificacion, Integer>{
+@Repository
+public interface NotificacionRepository extends JpaRepository<Notificacion, Integer> {
+    boolean existsByBoletaId(Integer boletaId);
     List<Notificacion> findByUsuarioId(Integer usuarioId);
-
-    Optional<Notificacion> findByBoletaId(Integer boletaId);
-
 }

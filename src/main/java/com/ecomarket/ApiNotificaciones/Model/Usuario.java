@@ -1,13 +1,11 @@
 package com.ecomarket.ApiNotificaciones.Model;
 
-import java.util.List;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,12 +32,6 @@ public class Usuario {
 
     @Column(name = "email", nullable = false, length = 70, unique = true)
     private String email;
-
-
-    //Relaciones con otras Entidades/Clases
-    @OneToMany(mappedBy = "usuario") // Si en Boleta usas objeto Usuario
-    @JsonManagedReference//Para evitar bucles en los get
-    private List<Boleta> boletas;
 
     
 }

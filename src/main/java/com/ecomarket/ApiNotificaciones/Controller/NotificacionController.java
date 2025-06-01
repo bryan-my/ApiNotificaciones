@@ -6,37 +6,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ecomarket.ApiNotificaciones.Model.Notificacion;
 import com.ecomarket.ApiNotificaciones.Service.NotificacionService;
+@RestController
+@RequestMapping("/api/notificaciones")
 
 public class NotificacionController {
 
     @Autowired
     private NotificacionService notificacionService;
 
-
-
-
-    @GetMapping("/generar")
-    public ResponseEntity<String> generarNotificaciones() {
-        notificacionService.generarNotificacionesDelDia();
-        return ResponseEntity.ok("Notificaciones generadas.");
-}
-
+    @GetMapping("/generar-desde-boletas")
+    public ResponseEntity<String> generar() {
+        notificacionService.generarDesdeBoletasNuevas();
+        return ResponseEntity.ok("Notificaciones generadas con éxito.");
+    }
 
     @GetMapping
-    public ResponseEntity<List<Notificacion>> getAll(){
-        return ResponseEntity.ok(notificacionService.getAll());
+    public List<Notificacion> listar() {
+        return notificacionService.listar();
     }
 
-    @GetMapping("/usuario/{usuarioId}")
-    public List<Notificacion> getByUsuario(@PathVariable Integer usuarioId) {
-        return notificacionService.getByUsuarioId(usuarioId);
+    @GetMapping("/usuario/{id}")
+    public List<Notificacion> porUsuario(@PathVariable Integer id) {
+        return notificacionService.porUsuario(id);
     }
-
-
-
-
-
 }
