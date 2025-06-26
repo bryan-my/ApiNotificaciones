@@ -2,6 +2,8 @@ package com.ecomarket.ApiNotificaciones.Model;
 
 import java.time.LocalDateTime;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Notificacion {
+public class Notificacion extends RepresentationModel<Notificacion>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
